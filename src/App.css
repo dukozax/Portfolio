@@ -1,0 +1,283 @@
+body{
+  background: #151515;
+  user-select: none;
+}
+
+.App{
+  background-image: url('backgrounds/1.jpg');
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.apps{
+  margin: 0px 30px;
+}
+
+.appD{
+  position: relative;
+  margin: 40px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  z-index: 10;
+  margin: 50px 10px;
+}
+
+.appD .image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 20px 10px;
+  position: relative;
+  top: 20px;
+}
+
+.appD span{
+  display: flex;
+  color: #efececd1;
+  margin: -10px 3px;
+  position: relative;
+  text-align: center;
+}
+
+.appD .transparent{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: transparent;
+  margin: 40px 10px;
+  z-index: 10;
+}
+
+.bottomBar{
+  position: fixed;
+  width: 100%;
+  height: 45px;
+  bottom: 0px;
+  background: #2e2e2e;
+  border-top: 1px solid rgba(0,0,0,.20);
+  z-index: 11;
+}
+
+.optionsBar{
+  width: 70vh;
+  height: calc(100% - 20vw);
+  background: #2e2e2e;
+  position: absolute;
+  z-index: 15000;
+  bottom: 46px;
+  box-shadow: 1px 2px 1px rgba(0,0,0,.10);
+  transform: translateX(-100%);
+  transition: 0.4s ease;
+}
+
+.optionsBar .applicationBar{
+  box-shadow: 1px 2px 1px rgba(0,0,0,.10);
+  background: rgba(255,255,255, 0.2);
+  width: 70px;
+  border-radius: 3px;
+  height: calc(100% - 80px);
+  position: relative;
+  margin: 40px 20px;
+}
+
+.optionsBar .applicationBar .appD{
+  margin: 0px;
+  transform: scale(0.7);
+}
+
+.optionsBar .applicationBar .appD span{
+  position: absolute;
+  top: 64px;
+  left: 70px;
+  background: rgba(0,0,0,.80);
+  padding: 4px;
+  transform: scale(0);
+  transition: 0.4s;
+  width: fit-content;
+  max-width: 200px;
+}
+
+.optionsBar .applicationBar .appD span::after{
+  content: '';
+  width: 0; 
+  height: 0; 
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent; 
+  border-right: 10px solid rgba(0,0,0,.80);
+  position: absolute;
+  left: -9px;
+}
+
+.focus{
+  transform: scale(1) !important;
+}
+
+.appLogo{
+  position: relative;
+  width: 55px;
+  height: 45px;
+  background: #92b37252;
+  cursor: pointer;
+  transition: 0.4s ease;
+}
+
+.appLogo img{
+  width: 100%;
+  height: 100%;
+  transform: scale(0.6);
+  transition: 0.4s ease;
+}
+
+.appLogoAtivo{
+  background: #92b372;
+}
+
+.appLogoAtivo img{
+  transform: scale(0.7);
+}
+
+.abertoFocus{
+  transform: translateX(0);
+}
+
+.demoPort{
+  position: absolute;
+  bottom: 65px;
+  right: 40px;
+  color: rgba(255,255,255, 0.4);
+}
+
+.appL{
+  position: absolute;
+  z-index: 90;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 15%);
+  width: 60vh;
+  height: auto;
+  background: #d6d6d6;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0,0,0,.20);
+  transition: 0.4s;
+  padding-bottom: 4vh;
+}
+
+.appDesktop{
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.05);
+  position: relative;
+  top: 25px;
+  padding-bottom: 8vh;
+}
+
+.appL .header{
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  top: 0px;
+  left: 0px;
+  display: flex;
+  background: linear-gradient(0deg, rgba(214,214,214,1) 0%, rgba(213,202,202,1) 100%);
+}
+
+.appL .header span{
+  position: relative;
+  text-align: center;
+  left: 45%;
+  margin: 7px 0px;
+  font-weight: bold;
+  color: rgb(59, 55, 55);
+}
+
+.appL .header .right{
+  position: absolute;
+  right: 15px;
+  z-index: 15;
+}
+
+.appL .header .right button{
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgb(75, 69, 69);
+}
+
+.appAberto{
+  transform: scale(1);
+}
+
+.appNaoAberto{
+  transform: scale(0) !important;
+}
+
+.appL .move{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  position: absolute;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.avatar{
+  width: 95px;
+  height: 95px;
+  position: relative;
+  top: 30px;
+  left: 30px;
+}
+
+.avatar img{
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.nameMe{
+  position: relative;
+  font-size: 18px;
+  margin: 45px 30px;
+}
+
+.relativeApp{
+  position: relative;
+}
+
+.aboutMe p{
+  position: relative;
+  margin: -40px 30px;
+}
+
+.tec{
+  padding: 4px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.20);
+}
+
+.php{
+  background: #8993c1;
+}
+
+.angular{
+  background: rgb(195 0 47);
+  color: #fff;
+}
+
+.vue{
+  background: #00c180;
+}
+
+.react{
+  background: #61dafb;
+}
+
+.normal{
+  background: #e0ecea;
+  box-shadow: 1px 1px 2px rgba(0,0,0,.10);
+}
