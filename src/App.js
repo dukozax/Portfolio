@@ -4,6 +4,7 @@ import Draggable from 'react-draggable';
 import Application from './Application';
 import Terminal from './Apps/Terminal';
 import AboutMe from './Apps/AboutMe';
+import Calculator from './Apps/Calculator';
 import { SelectableGroup, createSelectable } from 'react-selectable';
 
 class App extends React.Component {
@@ -14,7 +15,7 @@ class App extends React.Component {
         ativoMenu: false,
         appOpeneds: [],
         zIndex: 1,
-        hours: `${new Date().getHours()}:${new Date().getMinutes()}`,
+        hours: `00:00`,
         appsOptionsBar: [
           {
             'name': 'Terminal',
@@ -25,7 +26,15 @@ class App extends React.Component {
             'name': 'Me',
             'image': './apps/me.png',
             'app': AboutMe
-          }
+          },
+          {
+            'name': 'Calculator',
+            'image': './apps/calculator.png',
+            'app': Calculator,
+            'zIndex': 9001,
+            'fullScreen': false,
+            'mini': false
+          },
         ],
         allApps: [
           {
@@ -34,7 +43,8 @@ class App extends React.Component {
             'app': Terminal,
             'zIndex': 9001,
             'fullScreen': false,
-            'mini': false
+            'mini': false,
+            'seeDesktop': true
           },
           {
             'name': 'Me',
@@ -42,8 +52,19 @@ class App extends React.Component {
             'app': AboutMe,
             'zIndex': 9001,
             'fullScreen': false,
-            'mini': false
-          }
+            'mini': false,
+            'seeDesktop': true
+          },
+          {
+            'name': 'Calculator',
+            'image': './apps/calculator.png',
+            'app': Calculator,
+            'zIndex': 9001,
+            'fullScreen': false,
+            'mini': false,
+            'seeDesktop': false
+          },
+          
         ]
       }
   }
@@ -53,7 +74,15 @@ class App extends React.Component {
   horario(){
     setInterval(() => {
       const now = new Date();
-      this.setState({hours: `${now.getHours()}:${now.getMinutes()}`})
+      var auxMinutes = ''
+      var auxHours = ''
+      if(parseFloat(now.getMinutes()) < 10){
+        auxMinutes = '0'
+      }
+      if(parseFloat(now.getHours()) < 10){
+        auxHours = '0'
+      }
+      this.setState({hours: `${auxHours}${now.getHours()}:${auxMinutes}${now.getMinutes()}`})
     }, 1000);
   }
   zIndexApp(name){
@@ -133,11 +162,16 @@ class App extends React.Component {
     <div className="App">
       <div className="desktop">
         <SelectableGroup>
-          <div className="allScreen"></div>
+          <div className="allScreen">
+            <h1 className="hoursScreen">
+            { this.state.hours }
+            </h1>
+          </div>
         </SelectableGroup>
         <div className="apps">
           {
           this.state.allApps.map((item, i) =>  (
+          item.seeDesktop &&
           <Draggable
             grid={[95, 45]}
             onDrag={() => this.onStartDrag()}
@@ -203,14 +237,12 @@ class App extends React.Component {
         <div className="relativeApp" style={{zIndex: item.zIndex}}>
           <div className={`appL
           ${(this.state.appOpeneds.find(element => element.title == item.name) ? 'appAberto': 'appNaoAberto')}
-          ${(item.fullScreen ? 'fullScreen' : 'notFullScreen')}
           ${(item.mini ? 'mini' : 'notMini')}
           `}
           >
           <div className="header">
             <div 
             onClick={() => this.onDragApp(item.name)}
-            onDoubleClick={() => this.fullScreen(item.name)}
             className="move">
 
             </div>
@@ -222,16 +254,6 @@ class App extends React.Component {
                 onClick={() => this.mini(item.name)}>
                   <i class="fas fa-minus"></i>
                 </button>
-                { !item.fullScreen &&
-                <button 
-                onClick={() => this.fullScreen(item.name)}>
-                    <i class="fas fa-expand"></i>
-                </button>  }
-                { item.fullScreen &&
-                <button 
-                onClick={() => this.fullScreen(item.name)}>
-                    <i class="fas fa-compress"></i>
-                </button>  }
                 <button onClick={() => this.closeApp(item.name)}>
                     <i class="fas fa-times"></i>
                 </button>

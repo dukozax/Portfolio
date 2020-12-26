@@ -25,6 +25,9 @@ body{
   margin: 0px 30px;
   position: relative;
   z-index: 20;
+  width: auto;
+  height: auto;
+  position: absolute;
 }
 
 .appD{
@@ -185,7 +188,7 @@ body{
   z-index: 90;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, 15%);
+  transform: translate(-50%, 15%) scale(0);
   width: 60vh;
   height: auto;
   background: #d6d6d6;
@@ -239,11 +242,7 @@ body{
 }
 
 .appAberto{
-  transform: scale(1);
-}
-
-.appNaoAberto{
-  transform: scale(0) !important;
+  transform: translate(-50%, 15%) scale(1);
 }
 
 .appL .move{
@@ -277,6 +276,7 @@ body{
 
 .relativeApp{
   position: relative;
+  transition: 0.1s;
 }
 
 .aboutMe p{
@@ -337,10 +337,6 @@ body{
   left: 0px !important;
   top: 0px !important;
   transform: translate(0px, 0px) !important;
-}
-
-.appNaoAberto{
-  transform: scale(0) !important;
 }
 
 .inlineApp{
@@ -408,4 +404,81 @@ body{
   top: 0px;
   background: transparent;
   z-index: 5;
+}
+
+.calculator .numbers{
+  width: 84%;
+}
+
+.calculator .numbers button{
+  height: 5vh;
+}
+
+.calculator button{
+  width: calc(33.3% - 10px);
+  height: 3vh;
+  border: none;
+  outline: none;
+  margin: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  top: 75px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.calculator button:hover{
+  background: rgba(0,0,0,.70);
+  color: #fff;
+}
+
+.calculator .numbers .zero{
+  left: 35.4%;
+  position: relative;
+}
+
+.calculator .visor{
+  width: 100%;
+  position: relative;
+  top: -20px;
+}
+
+.calculator .visor h1{
+  padding: 5px;
+  float: right;
+  right: 1vh;
+  position: absolute;
+  top: 40px;
+  font-size: 18px;
+}
+
+.calculator .visor h2{
+  padding: 5px;
+  float: right;
+  right: 1vh;
+  position: absolute;
+  font-size: 16px;
+  top: 15px;
+}
+
+.calculator .operacoes{
+  position: absolute;
+  left: 84%;
+  top: 0px;
+}
+
+.calculator .operacoes button{
+  width: 200%;
+  position: relative;
+  display: block;
+}
+
+.hoursScreen{
+  position: fixed;
+  left: 44%;
+  color: rgba(255,255,255, 0.7);
+  font-weight: bold;
+  font-size: 400%;
+  text-shadow: 1px 2px 1px rgba(0,0,0,.10);
 }
