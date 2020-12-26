@@ -143,7 +143,7 @@ class App extends React.Component {
             onDrag={() => this.onStartDrag()}
             >
             <div
-            onClick={() => this.openApp(item.opened, item.name, item.image, false)}>
+            onDoubleClick={() => this.openApp(item.opened, item.name, item.image, false)}>
               <Application
               name={item.name}
               image={item.image}></Application>
