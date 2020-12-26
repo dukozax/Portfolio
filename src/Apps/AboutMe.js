@@ -17,7 +17,11 @@ class AboutMe extends React.Component {
             Alexandre Silva
         </h1>
         <p>
-        <span className="normal">I'm a web developer, I know <span className="react tec">React</span>, <span className="vue tec">Vue</span> and <span className="php tec">PHP</span>, <span className="angular tec">PHP</span> and NodeJS.</span>
+        <span className="normal">
+            I'm a web developer, I know 
+            <span className="react tec">React</span>, 
+            <span className="vue tec">Vue</span> and <span className="php tec">PHP</span>, 
+            <span className="angular tec">Angular</span> and <span className="nodejs tec">NodeJS.</span></span>
         </p>
     </div>
     )

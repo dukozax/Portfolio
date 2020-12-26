@@ -12,8 +12,19 @@ body{
   background-size: cover;
 }
 
+.App::after{
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0,0,0,.2);
+  top: 0px;
+}
+
 .apps{
   margin: 0px 30px;
+  position: relative;
+  z-index: 20;
 }
 
 .appD{
@@ -36,11 +47,11 @@ body{
 }
 
 .appD span{
-  display: flex;
   color: #efececd1;
-  margin: -10px 3px;
-  position: relative;
+  position: absolute;
   text-align: center;
+  left: 70%;
+  transform: translate(-50%);
 }
 
 .appD .transparent{
@@ -59,7 +70,7 @@ body{
   bottom: 0px;
   background: #2e2e2e;
   border-top: 1px solid rgba(0,0,0,.20);
-  z-index: 11;
+  z-index: 90009;
 }
 
 .optionsBar{
@@ -67,7 +78,7 @@ body{
   height: calc(100% - 20vw);
   background: #2e2e2e;
   position: absolute;
-  z-index: 15000;
+  z-index: 900003;
   bottom: 46px;
   box-shadow: 1px 2px 1px rgba(0,0,0,.10);
   transform: translateX(-100%);
@@ -77,7 +88,7 @@ body{
 .optionsBar .applicationBar{
   box-shadow: 1px 2px 1px rgba(0,0,0,.10);
   background: rgba(255,255,255, 0.2);
-  width: 70px;
+  width: 67px;
   border-radius: 3px;
   height: calc(100% - 80px);
   position: relative;
@@ -223,7 +234,7 @@ body{
   background: transparent;
   position: absolute;
   z-index: 10;
-  cursor: pointer;
+  cursor: move;
 }
 
 .avatar{
@@ -277,7 +288,106 @@ body{
   background: #61dafb;
 }
 
+.nodejs{
+  background: #90c53f;
+}
+
 .normal{
   background: #e0ecea;
   box-shadow: 1px 1px 2px rgba(0,0,0,.10);
+}
+
+.bottomBar .right{
+  position: absolute;
+  float: right;
+  right: 0px;
+  top: 0px;
+}
+
+.bottomBar .right .hours{
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  top: 12px;
+  position: relative;
+  right: 15px;
+}
+
+.fullScreen{
+  width: calc(100% - 70px) !important;
+  height: calc(100vh - 130px) !important;
+  left: 0px !important;
+  top: 0px !important;
+  transform: translate(0px, 0px) !important;
+}
+
+.appNaoAberto{
+  transform: scale(0) !important;
+}
+
+.inlineApp{
+  float: left;
+  top: -45px;
+  left: 55px;
+  background: transparent;
+  margin-left: 3px;
+}
+
+.mini{
+  transform: scale(0) !important;
+}
+
+.isMini::after{
+  content: '';
+  width: 100%;
+  height: 4px;
+  background: #92b372;
+  position: absolute;
+  left: 0px;
+  animation-name: scale;
+  animation-duration: 0.4s;
+}
+
+@keyframes scale{
+  0%{
+    transform: scale(0);
+  }
+  1%{
+    transform: scale(1);
+  }
+}
+
+.appsSearch{
+  position: absolute;
+  left: 13vh;
+  top: 40px;
+}
+
+.appsSearch input{
+  width: 51vh;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #92b37252;
+  color: #fff;
+}
+
+.appsSearch input::placeholder{
+  color: rgba(255,255,255, 0.3);
+}
+
+.appsSearch input:focus{
+  color: rgba(255,255,255, 0.7);
+  border: 1px solid #92b372;
+}
+
+.allScreen{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background: transparent;
+  z-index: 5;
 }

@@ -4,6 +4,7 @@ import Draggable from 'react-draggable';
 import Application from './Application';
 import Terminal from './Apps/Terminal';
 import AboutMe from './Apps/AboutMe';
+import { SelectableGroup, createSelectable } from 'react-selectable';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class App extends React.Component {
         ativoMenu: false,
         appOpeneds: [],
         zIndex: 1,
+        hours: `${new Date().getHours()}:${new Date().getMinutes()}`,
         appsOptionsBar: [
           {
             'name': 'Terminal',
@@ -20,7 +22,7 @@ class App extends React.Component {
             'opened': Terminal
           },
           {
-            'name': 'About me',
+            'name': 'Me',
             'image': './apps/me.png',
             'app': AboutMe
           }
@@ -30,16 +32,29 @@ class App extends React.Component {
             'name': 'Terminal',
             'image': './apps/terminal.png',
             'app': Terminal,
-            'zIndex': 0
+            'zIndex': 9001,
+            'fullScreen': false,
+            'mini': false
           },
           {
-            'name': 'About me',
+            'name': 'Me',
             'image': './apps/me.png',
             'app': AboutMe,
-            'zIndex': 0
+            'zIndex': 9001,
+            'fullScreen': false,
+            'mini': false
           }
         ]
       }
+  }
+  componentDidMount(){
+    this.horario()
+  }
+  horario(){
+    setInterval(() => {
+      const now = new Date();
+      this.setState({hours: `${now.getHours()}:${now.getMinutes()}`})
+    }, 1000);
   }
   zIndexApp(name){
     var array = [...this.state.allApps]
@@ -52,11 +67,16 @@ class App extends React.Component {
       this.setState({allApps: array})
     }
   }
-  openApp(app, name){
+  openApp(app, name, image, cond){
     if(!this.state.appOpeneds.find(element => element.title == name)){
       this.zIndexApp(name)
       this.setState(appOpeneds => ({
-        appOpeneds: [...this.state.appOpeneds, {'app': app, 'title': name, 'zIndex': this.state.zIndex}]
+      appOpeneds: [...this.state.appOpeneds, {
+        'app': app, 
+        'title': name, 
+        'image': image,
+        'zIndex': this.state.zIndex
+        }]
       }))
     } 
     this.onStartDrag()
@@ -66,12 +86,20 @@ class App extends React.Component {
       var array = [...this.state.appOpeneds]
       var itemFound = this.state.appOpeneds.find(e => e.title == name)
       var foundId = this.state.appOpeneds.indexOf(itemFound)
-      console.log(foundId)
       if(itemFound){
         array.splice(foundId, 1)
         this.setState({appOpeneds: array})
       }
     } 
+  }
+  fullScreen(name){
+    var array = [...this.state.allApps]
+    var itemFound = this.state.allApps.find(e => e.name == name)
+    var foundId = this.state.allApps.indexOf(itemFound)
+    if(itemFound){
+      array[foundId].fullScreen = !array[foundId].fullScreen
+      this.setState({allApps: array})
+    }
   }
   onStartDrag(){
     this.setState({appFocus: -1})
@@ -82,21 +110,47 @@ class App extends React.Component {
     this.setState({appFocus: -1})
     this.setState({ativoMenu: false})
   }
+  mini(name){
+    const found = this.state.allApps.find(element => element.name == name)
+    if(found){
+      var array = [...this.state.allApps]
+      var foundId = array.indexOf(found)
+      array[foundId].mini = true
+      this.setState({allApps: array})
+    }
+  }
+  openAppBar(name){
+    const found = this.state.allApps.find(element => element.name == name)
+    if(found){
+      var array = [...this.state.allApps]
+      var foundId = array.indexOf(found)
+      array[foundId].mini = !array[foundId].mini
+      this.setState({allApps: array})
+    }
+  }
   render(){
     return (
     <div className="App">
       <div className="desktop">
+        <SelectableGroup>
+          <div className="allScreen"></div>
+        </SelectableGroup>
         <div className="apps">
-            <Draggable
+          {
+          this.state.allApps.map((item, i) =>  (
+          <Draggable
             grid={[95, 45]}
             onDrag={() => this.onStartDrag()}
             >
-              <div>
+            <div
+            onClick={() => this.openApp(item.opened, item.name, item.image, false)}>
               <Application
-              name="Computer"
-              image="./apps/folder.png"></Application>
-              </div>
+              name={item.name}
+              image={item.image}></Application>
+            </div>
           </Draggable>
+          ))
+          }
         </div>
         <div className={`optionsBar ${(this.state.ativoMenu ? 'abertoFocus' : 'dontAberto')}`}>
           <div className="applicationBar">
@@ -105,13 +159,16 @@ class App extends React.Component {
           <div 
           onMouseEnter={() => this.setState({appFocus: i})}
           onMouseLeave={() => this.setState({appFocus: -1})}
-          onClick={() => this.openApp(item.opened, item.name)}>
+          onClick={() => this.openApp(item.opened, item.name, item.image, false)}>
           <Application
               name={item.name}
               image={item.image}
               focus={(this.state.appFocus == i ? true : false)}></Application>
           </div>
           ))}
+          </div>
+          <div className="appsSearch">
+            <input type="text" placeholder="Search app's"></input>
           </div>
         </div>
         <div className="bottomBar">
@@ -120,8 +177,25 @@ class App extends React.Component {
           className={`appLogo ${(this.state.ativoMenu ? 'appLogoAtivo' : 'AppLogoDontAtivo')}`}>
             <img src="./apps/logo.png"/>
           </div>
+          {
+          this.state.appOpeneds.map((item, i) =>  (
+          <div 
+          onClick={() => this.openAppBar(item.title)}
+          className={`appLogo inlineApp
+          ${(
+            this.state.allApps.find(e => e.name == item.title).mini ? 'isNotMini': 'isMini')}
+          `}>
+            <img src={item.image}/>
+          </div>
+          ))}
+          <div className="right">
+            <div className="hours">
+              <span>{ this.state.hours }</span>
+            </div>
+          </div>
         </div>
-        {this.state.allApps.map((item, i) => (
+        {
+        this.state.allApps.map((item, i) => (
         <Draggable
             handle=".move"
             onDrag={() => this.onDragApp(item.name)}
@@ -129,11 +203,14 @@ class App extends React.Component {
         <div className="relativeApp" style={{zIndex: item.zIndex}}>
           <div className={`appL
           ${(this.state.appOpeneds.find(element => element.title == item.name) ? 'appAberto': 'appNaoAberto')}
+          ${(item.fullScreen ? 'fullScreen' : 'notFullScreen')}
+          ${(item.mini ? 'mini' : 'notMini')}
           `}
           >
           <div className="header">
             <div 
             onClick={() => this.onDragApp(item.name)}
+            onDoubleClick={() => this.fullScreen(item.name)}
             className="move">
 
             </div>
@@ -141,12 +218,20 @@ class App extends React.Component {
                   { item.name }
               </span>
               <div className="right">
-                <button>
+                <button
+                onClick={() => this.mini(item.name)}>
                   <i class="fas fa-minus"></i>
                 </button>
-                <button>
-                    <i class="fas fa-plus"></i>
-                </button>
+                { !item.fullScreen &&
+                <button 
+                onClick={() => this.fullScreen(item.name)}>
+                    <i class="fas fa-expand"></i>
+                </button>  }
+                { item.fullScreen &&
+                <button 
+                onClick={() => this.fullScreen(item.name)}>
+                    <i class="fas fa-compress"></i>
+                </button>  }
                 <button onClick={() => this.closeApp(item.name)}>
                     <i class="fas fa-times"></i>
                 </button>
@@ -157,8 +242,7 @@ class App extends React.Component {
           </div>
           </div>
         </Draggable>
-        ))}
-        
+        ))} 
         <span
         className="demoPort"
         >Version Portfólio, created by kaway404</span>
