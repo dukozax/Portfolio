@@ -34,7 +34,15 @@ body{
   height: 50px;
   cursor: pointer;
   z-index: 10;
-  margin: 50px 10px;
+  margin: 50px 0px;
+  padding: 15px;
+  padding-bottom: 30px;
+  border: 1px dotted rgba(255,255,255, 0.0);
+}
+
+.appD:hover{
+  background: rgba(255,255,255, 0.2);
+  border: 1px dotted rgba(255,255,255, 0.7);
 }
 
 .appD .image{
@@ -43,15 +51,17 @@ body{
   object-fit: cover;
   margin: 20px 10px;
   position: relative;
-  top: 20px;
+  top: -20px;
+  left: -10px;
 }
 
 .appD span{
   color: #efececd1;
   position: absolute;
   text-align: center;
-  left: 70%;
+  left: calc(70% - 15px);
   transform: translate(-50%);
+  top: 70px;
 }
 
 .appD .transparent{
@@ -96,13 +106,21 @@ body{
 }
 
 .optionsBar .applicationBar .appD{
-  margin: 0px;
+  margin: 0px  !important;
   transform: scale(0.7);
+  padding: 0px !important;
+  padding-bottom: 0px  !important;
+  margin: 7px  !important;
+}
+
+.optionsBar .applicationBar .appD:hover{
+  background: transparent !important;
+  border: 1px dotted rgba(255,255,255, 0.0) !important;
 }
 
 .optionsBar .applicationBar .appD span{
   position: absolute;
-  top: 64px;
+  top: 9px;
   left: 70px;
   background: rgba(0,0,0,.80);
   padding: 4px;
