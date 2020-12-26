@@ -482,3 +482,11 @@ body{
   font-size: 400%;
   text-shadow: 1px 2px 1px rgba(0,0,0,.10);
 }
+
+.terminal{
+  background: #151515;
+  color: #fff;
+  padding: 10px;
+  height: 200px;
+  width: calc(100% - 20px);
+}
