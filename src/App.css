@@ -3,6 +3,26 @@ body{
   user-select: none;
 }
 
+::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #efefef;
+}
+
+::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #efefef;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px #c2c2c2;
+	background-color: #dedede;
+}
+
 .App{
   background-image: url('backgrounds/1.jpg');
   width: 100%;
@@ -96,6 +116,7 @@ body{
   box-shadow: 1px 2px 1px rgba(0,0,0,.10);
   transform: translateX(-100%);
   transition: 0.4s ease;
+  border-radius: 4px;
 }
 
 .optionsBar .applicationBar{
@@ -162,6 +183,7 @@ body{
   height: 100%;
   transform: scale(0.6);
   transition: 0.4s ease;
+  object-fit: cover;
 }
 
 .appLogoAtivo{
@@ -221,7 +243,7 @@ body{
 .appL .header span{
   position: relative;
   text-align: center;
-  left: 45%;
+  left: 43%;
   margin: 7px 0px;
   font-weight: bold;
   color: rgb(59, 55, 55);
@@ -489,4 +511,136 @@ body{
   padding: 10px;
   height: 200px;
   width: calc(100% - 20px);
+}
+
+.Config{
+  background: #fff;
+  transition: 0.4s ease;
+  height: auto;
+}
+
+.Config .list h2{
+  font-size: 15px;
+  padding: 8px;
+  font-weight: normal;
+}
+
+.Config .list h2 img{
+  width: 25px;
+  position: relative;
+  top: 4px;
+}
+
+.Config .list .item{
+  width: 50px;
+  max-width: 70px;
+  height: auto;
+  padding: 10px;
+  margin-left: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.Config .list .item:hover{
+  box-shadow: 3px 1px 2px rgba(0,0,0,.20);
+}
+
+.Config .list .item img{
+  width: 100%;
+  height: 100%;
+}
+
+.Config .list .item span{
+  font-size: 12px;
+  margin-left: -9px;
+}
+
+.Config .back{
+  position: absolute;
+  top: -35px;
+  border-radius: 5px;
+  background: linear-gradient(0deg, rgba(246,246,246,1) 0%, rgba(231,231,231,1) 53%, rgba(215,215,215,1) 91%);
+  border: 1px solid #aeaeae;
+  padding: 5px 10px 5px;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.Config .back:hover{
+  box-shadow: 1px 2px 1px rgba(0,0,0,.10);
+}
+
+.ConfigBackgrounds{
+  background: #fff;
+  overflow-y: auto;
+  max-height: 42vh;
+  position: relative;
+  top: 5px;
+  transform: scale(0.97);
+  left: 0px;
+  overflow-x: hidden;
+}
+
+.ConfigBackgrounds .item{
+  cursor: pointer;
+  height: 150px;
+}
+
+.ConfigBackgrounds .item:hover{
+  box-shadow: 1px 2px 1px rgba(0,0,0,.10);
+}
+
+.ConfigBackgrounds .item img{
+  width: 200px;
+  object-fit: cover;
+  margin: 30px;
+  height: 100px;
+}
+
+.show{
+  width: 100%;
+  background: #fff;
+  transition: 0.4s ease;
+  position: relative;
+}
+
+.showed{
+  transform: scale(1);
+}
+
+.notShow{
+  transform: scale(0);
+}
+
+.selected{
+  background: #92b37252;
+}
+
+.ConfigBackgrounds .item .right{
+  position: relative;
+  top: -130px;
+  left: 240px;
+}
+
+.colorSolid{
+  padding: 10px;
+}
+
+.colorSolid .se{
+  margin: 10px;
+}
+
+.colorSolid .se span{
+  margin: 10px;
+}
+
+.colorSolid .se input{
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  margin-top: 2px;
+  top: 4px;
 }

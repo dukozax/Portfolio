@@ -5,6 +5,7 @@ import Application from './Application';
 import Terminal from './Apps/Terminal';
 import AboutMe from './Apps/AboutMe';
 import Calculator from './Apps/Calculator';
+import Config from './Apps/Config';
 import { SelectableGroup, createSelectable } from 'react-selectable';
 
 class App extends React.Component {
@@ -35,6 +36,15 @@ class App extends React.Component {
             'fullScreen': false,
             'mini': false
           },
+          {
+            'name': 'Settings',
+            'image': './apps/settings.png',
+            'app': Config,
+            'zIndex': 9001,
+            'fullScreen': false,
+            'mini': false,
+            'seeDesktop': true
+          },
         ],
         allApps: [
           {
@@ -64,7 +74,15 @@ class App extends React.Component {
             'mini': false,
             'seeDesktop': false
           },
-          
+          {
+            'name': 'Settings',
+            'image': './apps/settings.png',
+            'app': Config,
+            'zIndex': 9001,
+            'fullScreen': false,
+            'mini': false,
+            'seeDesktop': true
+          },
         ]
       }
   }
@@ -159,7 +177,9 @@ class App extends React.Component {
   }
   render(){
     return (
-    <div className="App">
+    <div
+    className="App"
+    style={{ backgroundImage: `url(${window.localStorage.getItem('background')})` }}>
       <div className="desktop">
         <SelectableGroup>
           <div className="allScreen">
